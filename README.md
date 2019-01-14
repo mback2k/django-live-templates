@@ -5,7 +5,8 @@ support for live updating Django template snippets on model changes.
 
 This project is based upon and a partial reimplementation to Channels of
 [SwampDragon-live](https://github.com/mback2k/swampdragon-live) which was build
-using [SwampDragon](http://swampdragon.net/) with SwampDragon-auth and django-redis.
+using [SwampDragon](https://github.com/hagsteel/swampdragon)
+with SwampDragon-auth and django-redis.
 
 Installation
 ------------
