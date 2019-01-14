@@ -1,0 +1,3 @@
+recursive-include django_live_templates/static *
+include COPYING
+include README.md
