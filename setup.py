@@ -32,4 +32,5 @@ setup(
         'Operating System :: OS Independent',
     ],
     long_description=read_file('README.md'),
+    long_description_content_type='text/markdown',
 )
