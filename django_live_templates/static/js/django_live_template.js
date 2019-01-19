@@ -38,7 +38,9 @@ var LiveTemplates = function (socket, document) {
     };
   };
 };
-var liveTemplatesSocket = new WebSocket('ws://' + window.location.host + '/ws/live/templates/');
+var liveTemplatesProtocol = window.location.protocol.replace('http', 'ws');
+var liveTemplatesEndpoint = '//' + window.location.host + '/ws/live/templates/';
+var liveTemplatesSocket = new WebSocket(liveTemplatesProtocol + liveTemplatesEndpoint);
 liveTemplatesSocket.onopen = function (event) {
   liveTemplates = new LiveTemplates(liveTemplatesSocket, document);
   liveTemplates.listen(document);
