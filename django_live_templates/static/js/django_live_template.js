@@ -19,6 +19,9 @@ function LiveTemplates(socket, document) {
       };
     };
   };
+  this.socket.onopen = function (event) {
+    liveTemplates.listen(liveTemplates.document);
+  };
   this.socket.onmessage = function (event) {
     var data = JSON.parse(event.data);
     if ('live_channel' in data) {
@@ -42,8 +45,5 @@ function LiveTemplates(socket, document) {
   var protocol = window.location.protocol.replace('http', 'ws');
   var endpoint = '//' + window.location.host + '/ws/live/templates/';
   var socket = new WebSocket(protocol + endpoint);
-  socket.onopen = function (event) {
-    liveTemplates = new LiveTemplates(socket, document);
-    liveTemplates.listen(document);
-  };
+  var engine = new LiveTemplates(socket, document);
 })(document);
