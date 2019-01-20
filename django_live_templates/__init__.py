@@ -7,7 +7,7 @@ support for live updating Django template snippets on model changes.
 __version_info__ = {
     'major': 0,
     'minor': 0,
-    'micro': 1,
+    'micro': 2,
     'releaselevel': 'alpha',
 }
 
