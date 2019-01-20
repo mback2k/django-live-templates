@@ -1,4 +1,4 @@
-var LiveTemplates = function (socket, document) {
+function LiveTemplates(socket, document) {
   var liveTemplatesClass = 'django-template-live';
   var liveTemplates = this;
   this.socket = socket;
@@ -38,10 +38,12 @@ var LiveTemplates = function (socket, document) {
     };
   };
 };
-var liveTemplatesProtocol = window.location.protocol.replace('http', 'ws');
-var liveTemplatesEndpoint = '//' + window.location.host + '/ws/live/templates/';
-var liveTemplatesSocket = new WebSocket(liveTemplatesProtocol + liveTemplatesEndpoint);
-liveTemplatesSocket.onopen = function (event) {
-  liveTemplates = new LiveTemplates(liveTemplatesSocket, document);
-  liveTemplates.listen(document);
-};
+(function (document) {
+  var protocol = window.location.protocol.replace('http', 'ws');
+  var endpoint = '//' + window.location.host + '/ws/live/templates/';
+  var socket = new WebSocket(protocol + endpoint);
+  socket.onopen = function (event) {
+    liveTemplates = new LiveTemplates(socket, document);
+    liveTemplates.listen(document);
+  };
+})(document);
