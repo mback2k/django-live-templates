@@ -41,9 +41,9 @@ function LiveTemplates(socket, document) {
     };
   };
 };
-(function (document) {
+(function (window) {
   var protocol = window.location.protocol.replace('http', 'ws');
   var endpoint = '//' + window.location.host + '/ws/live/templates/';
   var socket = new WebSocket(protocol + endpoint);
-  var engine = new LiveTemplates(socket, document);
-})(document);
+  var engine = new LiveTemplates(socket, window.document);
+})(window);
