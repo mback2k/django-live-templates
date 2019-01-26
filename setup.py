@@ -29,7 +29,7 @@ setup(
     url='https://github.com/mback2k/django-live-templates',
     license='MIT',
     description=' '.join(doc.splitlines()).strip(),
-    install_requires=['channels', 'django-redis'],
+    install_requires=read_file('requirements.txt').splitlines(),
     classifiers=[
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Intended Audience :: Developers',
