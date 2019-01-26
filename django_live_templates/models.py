@@ -1,4 +1,10 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 from channels.layers import get_channel_layer
 from django.db.models.signals import post_save, pre_delete, post_delete
 from django.contrib.contenttypes.models import ContentType
