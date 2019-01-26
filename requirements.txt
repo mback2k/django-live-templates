@@ -1,2 +1,2 @@
-channels
-django-redis
+channels>=2.1.6
+django-redis>=4.10.0
