@@ -6,6 +6,8 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 from setuptools import setup, find_packages
+from django_live_templates import __version__ as version
+from django_live_templates import __doc__ as doc
 import os
 
 def read_file(filename):
@@ -19,14 +21,14 @@ def read_file(filename):
 
 setup(
     name='django-live-templates',
-    version=__import__('django_live_templates').__version__,
+    version=version,
     author='Marc Hoersken',
     author_email='info@marc-hoersken.de',
     packages=find_packages(),
     include_package_data=True,
     url='https://github.com/mback2k/django-live-templates',
     license='MIT',
-    description=u' '.join(__import__('django_live_templates').__doc__.splitlines()).strip(),
+    description=' '.join(doc.splitlines()).strip(),
     install_requires=['channels', 'django-redis'],
     classifiers=[
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
