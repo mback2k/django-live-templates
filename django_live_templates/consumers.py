@@ -79,7 +79,7 @@ class LiveTemplatesConsumer(WebsocketConsumer):
             cache_key_last_part = cache_key.split('-')[-1]
             if cache_key_last_part.startswith('u'):
                 if self.user:
-                    username_hash = get_username_hash(self.user)
+                    username_hash = get_username_hash(self.user.username)
                     if cache_key_last_part[1:] == username_hash:
                         return cache_key
 
