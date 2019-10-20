@@ -10,6 +10,8 @@ from django.db.models.query import QuerySet
 from django.template import Context
 
 class ModelInstanceRef(object):
+    __slots__ = 'instance_type_pk', 'instance_pk'
+
     @classmethod
     def create(cls, instance):
         instance_type = ContentType.objects.get_for_model(instance.__class__)
@@ -24,6 +26,8 @@ class ModelInstanceRef(object):
         return instance_type.get_object_for_this_type(pk=self.instance_pk)
 
 class ModelQuerySetRef(object):
+    __slots__ = 'queryset_type_pk', 'query'
+
     @classmethod
     def create(cls, queryset):
         queryset_type = ContentType.objects.get_for_model(queryset.model)
