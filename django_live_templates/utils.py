@@ -7,6 +7,7 @@ from __future__ import unicode_literals
 
 from django.core.cache import InvalidCacheBackendError, caches
 import hashlib
+import uuid
 
 def get_channel_cache():
     try:
@@ -14,6 +15,10 @@ def get_channel_cache():
     except InvalidCacheBackendError:
         channel_cache = caches['default']
     return channel_cache
+
+def get_channel_uuid(cache_key):
+    channel_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, cache_key))
+    return channel_uuid
 
 def get_instance_hash(instance_type_pk, instance_pk):
     instance_hash = hashlib.sha1(str('%d:%d' % (instance_type_pk, instance_pk)).encode('utf-8'))

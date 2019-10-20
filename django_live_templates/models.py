@@ -10,7 +10,7 @@ from django.db.models.signals import post_save, pre_delete, post_delete
 from django.contrib.contenttypes.models import ContentType
 from django.dispatch import receiver
 
-from .utils import get_channel_cache, get_instance_hash, get_queryset_hash
+from .utils import get_channel_cache
 from .pushers import push_new_content_for_instance
 from .pushers import push_new_content_for_queryset
 
@@ -22,11 +22,9 @@ def post_save_handler(sender, instance, created, **kwargs):
         channel_layer = get_channel_layer()
 
         if created:
-            queryset_hash = get_queryset_hash(instance_type.pk)
-            pushers = push_new_content_for_queryset(channel_cache, queryset_hash, instance.pk)
+            pushers = push_new_content_for_queryset(channel_cache, instance_type.pk, instance.pk)
         else:
-            instance_hash = get_instance_hash(instance_type.pk, instance.pk)
-            pushers = push_new_content_for_instance(channel_cache, instance_hash, instance.pk)
+            pushers = push_new_content_for_instance(channel_cache, instance_type.pk, instance.pk)
 
         for pusher in pushers:
             pusher(channel_layer)
@@ -37,8 +35,7 @@ def pre_delete_handler(sender, instance, **kwargs):
         instance_type = ContentType.objects.get_for_model(instance.__class__)
         channel_cache = get_channel_cache()
 
-        queryset_hash = get_queryset_hash(instance_type.pk)
-        pushers = push_new_content_for_queryset(channel_cache, queryset_hash, instance.pk)
+        pushers = push_new_content_for_queryset(channel_cache, instance_type.pk, instance.pk)
         instance.__django_live_template_pushers__ = list(pushers)
 
 @receiver(post_delete)
