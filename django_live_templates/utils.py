@@ -17,27 +17,27 @@ def get_channel_cache():
         channel_cache = caches['default']
     return channel_cache
 
-@lru_cache
+@lru_cache(maxsize=128)
 def get_channel_uuid(cache_key):
     channel_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, cache_key))
     return channel_uuid
 
-@lru_cache
+@lru_cache(maxsize=128)
 def get_instance_hash(instance_type_pk, instance_pk):
     instance_hash = hashlib.sha1(str('%d:%d' % (instance_type_pk, instance_pk)).encode('utf-8'))
     return instance_hash.hexdigest()
 
-@lru_cache
+@lru_cache(maxsize=128)
 def get_queryset_hash(queryset_type_pk):
     queryset_hash = hashlib.sha1(str('%d:qs' % queryset_type_pk).encode('utf-8'))
     return queryset_hash.hexdigest()
 
-@lru_cache
+@lru_cache(maxsize=128)
 def get_template_hash(template_name):
     template_hash = hashlib.sha1(template_name.encode('utf-8'))
     return template_hash.hexdigest()
 
-@lru_cache
+@lru_cache(maxsize=128)
 def get_username_hash(user_username):
     username_hash = hashlib.sha1(user_username.encode('utf-8'))
     return username_hash.hexdigest()
