@@ -10,8 +10,8 @@ wheel = "*"
 twine = "*"
 
 [packages]
-channels = ">=2.1.6"
-django-redis = ">=4.10.0"
+channels = "~=2.3.0"
+django-redis = "~=4.10.0"
 
 [requires]
 python_version = "3.7"
