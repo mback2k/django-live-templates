@@ -48,6 +48,7 @@ class LiveTemplatesConsumer(WebsocketConsumer):
         for qset_cache_key in self.channel_cache.iter_keys(cache_key_glob):
             queryset_ref, tmpl_cache_key, channel_name = self.channel_cache.get(qset_cache_key, (None, None, None))
             if queryset_ref and tmpl_cache_key and channel_name in self.channel_names:
+                # TODO: fix handling of deletion for queryset changes
                 if queryset_ref.resolve().filter(pk=queryset_pk).exists():
                     self.push_new_content(tmpl_cache_key)
 
