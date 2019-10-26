@@ -43,15 +43,15 @@ class ModelQuerySetRef(object):
 
 class ContextRef(Context):
     def __getitem__(self, key):
-        item = super(Context, self).__getitem__(key)
+        item = super().__getitem__(key)
         return self._resolve_ref(item)
 
     def get(self, key, otherwise=None):
-        item = super(Context, self).get(key, otherwise)
+        item = super().get(key, otherwise)
         return self._resolve_ref(item)
 
     def flatten(self):
-        data = super(Context, self).flatten()
+        data = super().flatten()
         return dict(map(lambda i: (i[0], self._resolve_ref(i[1])), data.items()))
 
     def _resolve_ref(self, item):

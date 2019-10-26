@@ -18,9 +18,10 @@ def get_channel_cache():
     return channel_cache
 
 @lru_cache(maxsize=128)
-def get_channel_uuid(cache_key):
+def get_channel_uuid_and_name(cache_key):
     channel_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, cache_key))
-    return channel_uuid
+    channel_name = 'django-template-live-%s' % channel_uuid
+    return channel_uuid, channel_name
 
 @lru_cache(maxsize=128)
 def get_instance_hash(instance_type_pk, instance_pk):
@@ -54,7 +55,7 @@ def get_key_for_instance(template_name, user, instance_ref):
         username_hash = get_username_hash(user.username)
         cache_key = '%s-u%s' % (cache_key, username_hash)
 
-    return cache_key
+    return instance_hash, cache_key
 
 def get_key_for_queryset(template_name, user, queryset_ref):
     queryset_type_pk = queryset_ref.queryset_type_pk
@@ -68,4 +69,4 @@ def get_key_for_queryset(template_name, user, queryset_ref):
         username_hash = get_username_hash(user.username)
         cache_key = '%s-u%s' % (cache_key, username_hash)
 
-    return cache_key
+    return queryset_hash, cache_key
